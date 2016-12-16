@@ -14,10 +14,10 @@ public class Main {
     public static void main(String... args) {
         GitHubRequester requester = new GitHubRequester();
         requester.setFollowerLimit(0); // to sort the result by followers
-        requester.setUserLimit(50);
+        requester.setUserLimit(5); // setting this to 5 to have a safety limit
         ArrayList<Item> users = requester.getUsers();
         
-        LOGGER.log(Level.INFO, "Request result with " + users.size() + "users.");
+        LOGGER.log(Level.INFO, "Request result with " + users.size() + " users.");
         
         for (Item user : users) {
             System.out.println(user.getLogin() + " - " + user.getFollowers());
