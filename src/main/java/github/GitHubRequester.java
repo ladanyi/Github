@@ -49,6 +49,7 @@ public class GitHubRequester {
         }
         
         return getUsersWithFollowerNumber(users);
+        //return users;
     }
     
     private String readUrl(URL url) {
