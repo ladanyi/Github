@@ -12,6 +12,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Created by user on 2016. 12. 16..
@@ -43,9 +45,10 @@ public class GitHubRequester {
             String jsonText = readUrl(url);
             Page page = jsonGetter.fromJson(jsonText, Page.class);
             
-            for (Item item : page.getItems()) {
-                users.add(item);
-            }
+//            for (Item item : page.getItems()) {
+//                users.add(item);
+//            }
+            page.getItems().stream().forEach(e -> users.add(e));
         }
         
         return getUsersWithFollowerNumber(users);
@@ -72,13 +75,15 @@ public class GitHubRequester {
     
     private ArrayList<Item> getUsersWithFollowerNumber(ArrayList<Item> users) {
         ArrayList<Item> completeUsers = new ArrayList<Item>();
-        
-        for (Item user : users) {
-            URL followerUrl = user.getUrl();
-            String jsonText = readUrl(followerUrl);
-            Item completeUser = jsonGetter.fromJson(jsonText, Item.class);
-            completeUsers.add(completeUser);
-        }
+//
+////        for (Item user : users) {
+////            URL followerUrl = user.getUrl();
+////            String jsonText = readUrl(followerUrl);
+////            Item completeUser = jsonGetter.fromJson(jsonText, Item.class);
+////            completeUsers.add(completeUser);
+////        }
+      
+        users.stream().forEach(e -> completeUsers.add(jsonGetter.fromJson(readUrl(e.getUrl()),Item.class)));
         
         return completeUsers;
     }

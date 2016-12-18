@@ -19,9 +19,10 @@ public class Main {
         
         LOGGER.log(Level.INFO, "Request result with " + users.size() + " users.");
         
-        for (Item user : users) {
-            System.out.println(user.getLogin() + " - " + user.getFollowers());
-        }
+//        for (Item user : users) {
+//            System.out.println(user.getLogin() + " - " + user.getFollowers());
+//        }
+        users.stream().forEach(e -> System.out.println(e));
     }
     
 }
